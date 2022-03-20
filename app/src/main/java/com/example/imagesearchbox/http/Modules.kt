@@ -1,8 +1,8 @@
 package com.example.imagesearchbox.http
 
-import android.util.Log
 import com.example.imagesearchbox.http.URL.BASE_URL
 import com.example.imagesearchbox.ui.search.SearchViewModel
+import com.example.imagesearchbox.utils.Constants.API_KEY
 import com.google.gson.GsonBuilder
 import com.orhanobut.logger.Logger
 import okhttp3.OkHttpClient
@@ -41,7 +41,7 @@ fun createHttpClient(): OkHttpClient {
         val url = it.request().url.toString()
         Logger.d(url)
         val request = it.request().newBuilder()
-            .addHeader("Authorization", "KakaoAK 3ea7e0ceef63be8acfd789eac1e2c445")
+            .addHeader("Authorization", API_KEY)
             .url(url)
             .build()
         return@addInterceptor it.proceed(request)
