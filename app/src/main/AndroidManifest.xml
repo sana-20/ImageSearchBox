@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ImageSearchBox">
+        <activity android:name=".ui.room.RoomActivity"/>
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">

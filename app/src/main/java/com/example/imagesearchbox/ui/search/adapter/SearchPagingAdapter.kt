@@ -11,7 +11,7 @@ import com.example.imagesearchbox.http.model.Response
 class SearchPagingAdapter(private val clickListener: ClickInterface) : PagingDataAdapter<Response.Document, SearchPagingAdapter.SearchPagingViewHolder>(ItemDiffCallBack()) {
 
     interface ClickInterface {
-        fun saveClicked(view: View)
+        fun saveClicked(view: View, doc: Response.Document?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchPagingViewHolder {
@@ -28,7 +28,7 @@ class SearchPagingAdapter(private val clickListener: ClickInterface) : PagingDat
         fun bind(doc: Response.Document?) {
             binding.item = doc
             binding.imgHeart.setOnClickListener {
-                clickListener.saveClicked(it)
+                clickListener.saveClicked(it, doc)
             }
         }
     }
