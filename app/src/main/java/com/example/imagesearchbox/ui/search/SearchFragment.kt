@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imagesearchbox.databinding.FragmentSearchBinding
 import kotlinx.coroutines.Job
@@ -41,7 +42,7 @@ class SearchFragment : Fragment() {
         searchAdapter = SearchPagingAdapter()
 
         binding.recyclerSearch.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(context, 2)
             adapter = searchAdapter
         }
 
