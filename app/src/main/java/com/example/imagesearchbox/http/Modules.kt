@@ -5,7 +5,9 @@ import com.example.imagesearchbox.ui.search.SearchViewModel
 import com.example.imagesearchbox.utils.Constants.API_KEY
 import com.google.gson.GsonBuilder
 import com.orhanobut.logger.Logger
+import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.internal.cache.CacheInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -32,19 +34,11 @@ val viewModelModules = module {
 
 
 fun createHttpClient(): OkHttpClient {
-    val client = OkHttpClient.Builder()
-    client.connectTimeout(10, TimeUnit.SECONDS)
-    client.readTimeout(10, TimeUnit.SECONDS)
-    client.writeTimeout(10, TimeUnit.SECONDS)
-    return client.addInterceptor {
-        val url = it.request().url.toString()
-        Logger.d(url)
-        val request = it.request().newBuilder()
-            .addHeader("Authorization", API_KEY)
-            .url(url)
-            .build()
-        return@addInterceptor it.proceed(request)
-    }.build()
+    return OkHttpClient.Builder()
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
+        .writeTimeout(10, TimeUnit.SECONDS)
+        .addInterceptor(CacheInterceptor()).build()
 }
 
 inline fun <reified T> createWebService(okHttpClient: OkHttpClient, baseUrl: String): T {

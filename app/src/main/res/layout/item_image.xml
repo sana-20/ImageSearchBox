@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="item"
             type="com.example.imagesearchbox.http.model.Response.Document" />
+        <variable
+            name="vm"
+            type="com.example.imagesearchbox.ui.search.SearchViewModel" />
+
     </data>
 
     <RelativeLayout
@@ -37,7 +43,7 @@
             android:layout_height="24dp"
             android:layout_below="@id/img_thumbnail"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/icon_on" />
+            android:src="@drawable/selector_save" />
 
     </RelativeLayout>
 

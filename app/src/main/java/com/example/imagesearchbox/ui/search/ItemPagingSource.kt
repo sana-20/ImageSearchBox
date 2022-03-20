@@ -32,6 +32,7 @@ class ItemPagingSource(private val service: SearchService, private val query: St
                 imageResponse = imageCall.await()
                 videoResponse = videoCall.await()
                 val mergedList = mergeResponse(imageResponse.documents, videoResponse.documents)
+                Logger.d(mergedList)
 
                 val isEnd = imageResponse.meta.is_end && videoResponse.meta.is_end
                 val nextKey = if (isEnd) null else page + 1

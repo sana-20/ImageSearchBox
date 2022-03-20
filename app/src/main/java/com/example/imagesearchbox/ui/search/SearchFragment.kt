@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imagesearchbox.databinding.FragmentSearchBinding
+import com.example.imagesearchbox.ui.search.adapter.SearchPagingAdapter
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), SearchPagingAdapter.ClickInterface {
 
     private lateinit var searchAdapter: SearchPagingAdapter
 
@@ -39,7 +39,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initView() {
-        searchAdapter = SearchPagingAdapter()
+        searchAdapter = SearchPagingAdapter(this)
 
         binding.recyclerSearch.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -52,6 +52,10 @@ class SearchFragment : Fragment() {
             }
         }
 
+    }
+
+    override fun saveClicked(view: View) {
+        view.isSelected = !view.isSelected
     }
 
 }
