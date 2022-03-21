@@ -1,19 +1,17 @@
-package com.example.imagesearchbox.ui.box
+package com.example.imagesearchbox.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.imagesearchbox.db.MyBox
-import com.example.imagesearchbox.db.MyBoxRepository
-import com.orhanobut.logger.Logger
+import com.example.imagesearchbox.model.MyBox
+import com.example.imagesearchbox.repository.MyBoxRepository
 import kotlinx.coroutines.launch
 
 
 class MyBoxViewModel(private val dataRepository: MyBoxRepository) : ViewModel() {
 
-    val allWords: LiveData<List<MyBox>> = dataRepository.allMybox.asLiveData()
+    val allMyBox: LiveData<List<MyBox>> = dataRepository.allMyBox.asLiveData()
 
     fun insert(myBox: MyBox) = viewModelScope.launch {
         dataRepository.insert(myBox)

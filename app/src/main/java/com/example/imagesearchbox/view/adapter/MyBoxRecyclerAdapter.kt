@@ -1,10 +1,10 @@
-package com.example.imagesearchbox.ui.box
+package com.example.imagesearchbox.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagesearchbox.databinding.ItemBoxBinding
-import com.example.imagesearchbox.db.MyBox
+import com.example.imagesearchbox.model.MyBox
 import kotlin.properties.Delegates
 
 class MyBoxRecyclerAdapter: RecyclerView.Adapter<MyBoxRecyclerAdapter.ViewHolder>() {

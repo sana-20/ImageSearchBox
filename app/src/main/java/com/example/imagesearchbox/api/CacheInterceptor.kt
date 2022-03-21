@@ -1,4 +1,4 @@
-package com.example.imagesearchbox.http
+package com.example.imagesearchbox.api
 
 import com.example.imagesearchbox.utils.Constants.API_KEY
 import okhttp3.Interceptor

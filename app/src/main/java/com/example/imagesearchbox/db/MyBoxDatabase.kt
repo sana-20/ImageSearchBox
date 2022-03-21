@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.imagesearchbox.model.MyBox
 import com.example.imagesearchbox.utils.Constants.DATABASE_NAME
 
 @Database(entities = [MyBox::class], version = 3)

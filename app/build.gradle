@@ -50,7 +50,6 @@ dependencies {
     // Logger
     implementation 'com.orhanobut:logger:2.2.0'
 
-
     // AndroidX
     implementation "androidx.fragment:fragment-ktx:1.4.1"
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
@@ -60,10 +59,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-//    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
-//    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-//    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-
 
     // okhttp3
     implementation 'com.squareup.okhttp3:okhttp:4.7.2'

@@ -1,11 +1,11 @@
-package com.example.imagesearchbox.http
+package com.example.imagesearchbox.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.imagesearchbox.http.model.Response
-import com.example.imagesearchbox.ui.search.ItemPagingSource
-import com.example.imagesearchbox.ui.search.ItemPagingSource.Companion.NETWORK_PAGE_SIZE
+import com.example.imagesearchbox.api.SearchService
+import com.example.imagesearchbox.model.Response
+import com.example.imagesearchbox.repository.ItemPagingSource.Companion.NETWORK_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 
 

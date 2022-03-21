@@ -1,15 +1,18 @@
-package com.example.imagesearchbox.ui.search.adapter
+package com.example.imagesearchbox.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagesearchbox.databinding.ItemImageBinding
-import com.example.imagesearchbox.http.model.Response
+import com.example.imagesearchbox.model.Response
 
-class SearchPagingAdapter(private val clickListener: ClickInterface) : PagingDataAdapter<Response.Document, SearchPagingAdapter.SearchPagingViewHolder>(ItemDiffCallBack()) {
+class SearchPagingAdapter(private val clickListener: ClickInterface) :
+    PagingDataAdapter<Response.Document, SearchPagingAdapter.SearchPagingViewHolder>(
+        ItemDiffCallBack
+    ) {
 
     interface ClickInterface {
         fun saveClicked(view: ImageView, doc: Response.Document?)
@@ -30,6 +33,24 @@ class SearchPagingAdapter(private val clickListener: ClickInterface) : PagingDat
             binding.item = doc
             binding.imgHeart.setOnClickListener {
                 clickListener.saveClicked(binding.imgHeart, doc)
+            }
+        }
+    }
+
+    companion object {
+        private val ItemDiffCallBack = object : DiffUtil.ItemCallback<Response.Document>() {
+            override fun areItemsTheSame(
+                oldItem: Response.Document,
+                newItem: Response.Document
+            ): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(
+                oldItem: Response.Document,
+                newItem: Response.Document
+            ): Boolean {
+                return oldItem == newItem
             }
         }
     }

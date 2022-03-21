@@ -1,8 +1,8 @@
-package com.example.imagesearchbox.http
+package com.example.imagesearchbox.api
 
-import com.example.imagesearchbox.http.URL.SEARCH_IMAGE_URL
-import com.example.imagesearchbox.http.URL.SEARCH_VIDEO_URL
-import com.example.imagesearchbox.http.model.Response
+import com.example.imagesearchbox.api.URL.SEARCH_IMAGE_URL
+import com.example.imagesearchbox.api.URL.SEARCH_VIDEO_URL
+import com.example.imagesearchbox.model.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 

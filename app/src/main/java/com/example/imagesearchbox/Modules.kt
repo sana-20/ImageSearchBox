@@ -1,11 +1,15 @@
-package com.example.imagesearchbox.http
+package com.example.imagesearchbox
 
 import android.content.Context
+import com.example.imagesearchbox.api.CacheInterceptor
+import com.example.imagesearchbox.api.SearchService
 import com.example.imagesearchbox.db.MyBoxDatabase
-import com.example.imagesearchbox.db.MyBoxRepository
-import com.example.imagesearchbox.http.URL.BASE_URL
-import com.example.imagesearchbox.ui.box.MyBoxViewModel
-import com.example.imagesearchbox.ui.search.SearchViewModel
+import com.example.imagesearchbox.repository.MyBoxRepository
+import com.example.imagesearchbox.api.URL.BASE_URL
+import com.example.imagesearchbox.repository.ApiRepository
+import com.example.imagesearchbox.repository.RepositoryImpl
+import com.example.imagesearchbox.viewmodel.MyBoxViewModel
+import com.example.imagesearchbox.viewmodel.SearchViewModel
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -14,7 +18,6 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-
 
 val appModules = module {
     single {

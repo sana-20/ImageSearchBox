@@ -1,10 +1,10 @@
-package com.example.imagesearchbox.ui.main
+package com.example.imagesearchbox.view.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.imagesearchbox.ui.box.MyBoxFragment
-import com.example.imagesearchbox.ui.search.SearchFragment
+import com.example.imagesearchbox.view.MyBoxFragment
+import com.example.imagesearchbox.view.SearchFragment
 import com.example.imagesearchbox.utils.Constants.TAB_MYPAGE
 import com.example.imagesearchbox.utils.Constants.TAB_SEARCH
 

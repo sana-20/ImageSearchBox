@@ -1,4 +1,4 @@
-package com.example.imagesearchbox.http
+package com.example.imagesearchbox.api
 
 object URL {
     const val BASE_URL = "https://dapi.kakao.com"

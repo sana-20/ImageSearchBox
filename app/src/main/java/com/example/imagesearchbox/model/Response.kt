@@ -1,4 +1,4 @@
-package com.example.imagesearchbox.http.model
+package com.example.imagesearchbox.model
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

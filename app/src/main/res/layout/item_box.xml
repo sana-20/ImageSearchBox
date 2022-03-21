@@ -3,7 +3,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.imagesearchbox.db.MyBox" />
+            type="com.example.imagesearchbox.model.MyBox" />
     </data>
 
     <RelativeLayout

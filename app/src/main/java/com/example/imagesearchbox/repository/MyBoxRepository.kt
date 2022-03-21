@@ -1,13 +1,16 @@
-package com.example.imagesearchbox.db
+package com.example.imagesearchbox.repository
 
 import androidx.annotation.WorkerThread
+import com.example.imagesearchbox.model.MyBox
+import com.example.imagesearchbox.db.MyBoxDao
+import com.example.imagesearchbox.db.MyBoxDatabase
 import kotlinx.coroutines.flow.Flow
 
 class MyBoxRepository(database: MyBoxDatabase) {
 
     private val dao: MyBoxDao = database.myBoxDao()
 
-    val allMybox: Flow<List<MyBox>> = dao.getAllMyBoxData()
+    val allMyBox: Flow<List<MyBox>> = dao.getAllMyBoxData()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

@@ -1,8 +1,6 @@
 package com.example.imagesearchbox
 
 import android.app.Application
-import com.example.imagesearchbox.http.appModules
-import com.example.imagesearchbox.http.viewModelModules
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import org.koin.android.ext.koin.androidContext

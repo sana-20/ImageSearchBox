@@ -1,4 +1,4 @@
-package com.example.imagesearchbox.db
+package com.example.imagesearchbox.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

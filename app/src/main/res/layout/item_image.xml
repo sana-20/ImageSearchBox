@@ -3,7 +3,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.imagesearchbox.http.model.Response.Document" />
+            type="com.example.imagesearchbox.model.Response.Document" />
 
     </data>
 

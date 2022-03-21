@@ -1,15 +1,12 @@
-package com.example.imagesearchbox.ui.search
+package com.example.imagesearchbox.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.imagesearchbox.http.SearchService
-import com.example.imagesearchbox.http.model.Response
+import com.example.imagesearchbox.api.SearchService
+import com.example.imagesearchbox.model.Response
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.merge
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class ItemPagingSource(private val service: SearchService, private val query: String) :
     PagingSource<Int, Response.Document>() {
@@ -45,7 +42,6 @@ class ItemPagingSource(private val service: SearchService, private val query: St
 
             }
         } catch (e: Exception) {
-            Logger.d(e.message.toString())
             LoadResult.Error(e)
         }
     }

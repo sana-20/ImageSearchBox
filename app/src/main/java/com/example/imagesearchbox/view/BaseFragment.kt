@@ -1,24 +1,24 @@
-package com.example.imagesearchbox.ui.base
+package com.example.imagesearchbox.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment : Fragment() {
-
-    private lateinit var mView: View
-
-    abstract fun getLayoutRes(): Int
+abstract class BaseFragment<VB: ViewBinding> : Fragment() {
 
     abstract fun initView()
 
-    abstract fun observeChange()
+    abstract fun getViewBinding(): VB
+
+    private var _binding: VB? = null
+    val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater.inflate(getLayoutRes(), container, false)
-        return mView
+        _binding = getViewBinding()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,9 +26,9 @@ abstract class BaseFragment : Fragment() {
         initView()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        observeChange()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
