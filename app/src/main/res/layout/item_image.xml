@@ -25,7 +25,7 @@
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.datetime}"
+            setDate="@{item.datetime}"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@id/img_heart"
             android:layout_marginEnd="4dp"

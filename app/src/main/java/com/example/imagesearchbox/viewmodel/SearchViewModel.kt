@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 
 class SearchViewModel(private val repository: ApiRepository) : ViewModel() {
 
-    suspend fun getImages(query: String) : Flow<PagingData<Response.Document>> {
-     return repository.getImagePaging(query).cachedIn(viewModelScope)
+    suspend fun getImages(query: String): Flow<PagingData<Response.Document>> {
+        return repository.getImagePaging(query).cachedIn(viewModelScope)
     }
 
 }
