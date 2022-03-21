@@ -3,6 +3,7 @@ package com.example.imagesearchbox.ui.search.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagesearchbox.databinding.ItemImageBinding
@@ -11,7 +12,7 @@ import com.example.imagesearchbox.http.model.Response
 class SearchPagingAdapter(private val clickListener: ClickInterface) : PagingDataAdapter<Response.Document, SearchPagingAdapter.SearchPagingViewHolder>(ItemDiffCallBack()) {
 
     interface ClickInterface {
-        fun saveClicked(view: View, doc: Response.Document?)
+        fun saveClicked(view: ImageView, doc: Response.Document?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchPagingViewHolder {
@@ -28,7 +29,7 @@ class SearchPagingAdapter(private val clickListener: ClickInterface) : PagingDat
         fun bind(doc: Response.Document?) {
             binding.item = doc
             binding.imgHeart.setOnClickListener {
-                clickListener.saveClicked(it, doc)
+                clickListener.saveClicked(binding.imgHeart, doc)
             }
         }
     }

@@ -9,7 +9,7 @@ import kotlin.properties.Delegates
 
 class MyBoxRecyclerAdapter: RecyclerView.Adapter<MyBoxRecyclerAdapter.ViewHolder>() {
 
-    var items: List<MyBox> by Delegates.observable(arrayListOf()) { _, _, _ ->
+    private var items: List<MyBox> by Delegates.observable(arrayListOf()) { _, _, _ ->
         notifyDataSetChanged()
     }
 
@@ -19,7 +19,7 @@ class MyBoxRecyclerAdapter: RecyclerView.Adapter<MyBoxRecyclerAdapter.ViewHolder
 
     inner class ViewHolder(private val binding: ItemBoxBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MyBox){
-            //binding.item = item
+            binding.item = item
         }
     }
 

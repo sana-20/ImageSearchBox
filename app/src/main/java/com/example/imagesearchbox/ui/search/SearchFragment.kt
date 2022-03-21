@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.imagesearchbox.R
 import com.example.imagesearchbox.databinding.FragmentSearchBinding
 import com.example.imagesearchbox.db.MyBox
 import com.example.imagesearchbox.http.model.Response
@@ -60,11 +63,10 @@ class SearchFragment : Fragment(), SearchPagingAdapter.ClickInterface {
 
     }
 
-    override fun saveClicked(view: View, doc: Response.Document?) {
-        view.isSelected = !view.isSelected
+    override fun saveClicked(view: ImageView, doc: Response.Document?) {
+        view.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_on))
         doc?.thumbnail?.let {
             myBoxViewModel.insert(MyBox(it))
-            Logger.d("insert")
         }
     }
 

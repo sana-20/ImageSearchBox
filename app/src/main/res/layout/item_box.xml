@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
+        <variable
+            name="item"
+            type="com.example.imagesearchbox.db.MyBox" />
     </data>
 
     <RelativeLayout
@@ -14,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="128dp"
             android:scaleType="matrix"
-            android:layout_marginBottom="8dp"/>
+            loadUrl="@{item.url}"/>
 
     </RelativeLayout>
 
