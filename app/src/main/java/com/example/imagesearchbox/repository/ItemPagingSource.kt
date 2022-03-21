@@ -3,33 +3,35 @@ package com.example.imagesearchbox.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.imagesearchbox.api.SearchService
-import com.example.imagesearchbox.model.Response
+import com.example.imagesearchbox.model.ApiResponse
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
 class ItemPagingSource(private val service: SearchService, private val query: String) :
-    PagingSource<Int, Response.Document>() {
+    PagingSource<Int, ApiResponse.Document>() {
 
     companion object {
         const val NETWORK_PAGE_SIZE = 20
         const val ITEM_STARTING_PAGE_INDEX = 1
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Response.Document> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ApiResponse.Document> {
         return try {
             coroutineScope {
                 val page = params.key ?: ITEM_STARTING_PAGE_INDEX
 
-                val imageResponse: Response?
-                val videoResponse: Response?
+                val imageResponse: ApiResponse?
+                val videoResponse: ApiResponse?
                 val imageCall = async { service.getImage(query, page, NETWORK_PAGE_SIZE) }
                 val videoCall = async { service.getVideo(query, page, NETWORK_PAGE_SIZE) }
 
                 imageResponse = imageCall.await()
                 videoResponse = videoCall.await()
+
+                Logger.d(imageResponse)
+
                 val mergedList = mergeResponse(imageResponse.documents, videoResponse.documents)
-                Logger.d(mergedList)
 
                 val isEnd = imageResponse.meta.is_end && videoResponse.meta.is_end
                 val nextKey = if (isEnd) null else page + 1
@@ -47,10 +49,10 @@ class ItemPagingSource(private val service: SearchService, private val query: St
     }
 
     private fun mergeResponse(
-        list1: List<Response.Document>,
-        list2: List<Response.Document>
-    ): MutableList<Response.Document> {
-        val mergedList = mutableListOf<Response.Document>()
+        list1: List<ApiResponse.Document>,
+        list2: List<ApiResponse.Document>
+    ): MutableList<ApiResponse.Document> {
+        val mergedList = mutableListOf<ApiResponse.Document>()
         mergedList.addAll(list1)
         mergedList.addAll(list2)
         mergedList.sortByDescending {
@@ -60,7 +62,7 @@ class ItemPagingSource(private val service: SearchService, private val query: St
     }
 
 
-    override fun getRefreshKey(state: PagingState<Int, Response.Document>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, ApiResponse.Document>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(
                 anchorPosition

@@ -1,7 +1,6 @@
 package com.example.imagesearchbox.view
 
 import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -10,12 +9,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.imagesearchbox.R
 import com.example.imagesearchbox.databinding.FragmentSearchBinding
 import com.example.imagesearchbox.model.MyBox
-import com.example.imagesearchbox.model.Response
+import com.example.imagesearchbox.model.ApiResponse
 import com.example.imagesearchbox.utils.hideSoftKeyboard
 import com.example.imagesearchbox.view.adapter.SearchPagingAdapter
 import com.example.imagesearchbox.viewmodel.MyBoxViewModel
 import com.example.imagesearchbox.viewmodel.SearchViewModel
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -64,7 +62,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchPagingAdapte
         }
     }
 
-    override fun saveClicked(view: ImageView, doc: Response.Document?) {
+    override fun saveClicked(view: ImageView, doc: ApiResponse.Document?) {
         view.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.icon_on))
         doc?.thumbnail?.let {
             myBoxViewModel.insert(MyBox(it))

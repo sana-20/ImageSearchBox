@@ -7,15 +7,15 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagesearchbox.databinding.ItemImageBinding
-import com.example.imagesearchbox.model.Response
+import com.example.imagesearchbox.model.ApiResponse
 
 class SearchPagingAdapter(private val clickListener: ClickInterface) :
-    PagingDataAdapter<Response.Document, SearchPagingAdapter.SearchPagingViewHolder>(
+    PagingDataAdapter<ApiResponse.Document, SearchPagingAdapter.SearchPagingViewHolder>(
         ItemDiffCallBack
     ) {
 
     interface ClickInterface {
-        fun saveClicked(view: ImageView, doc: Response.Document?)
+        fun saveClicked(view: ImageView, doc: ApiResponse.Document?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchPagingViewHolder {
@@ -29,7 +29,7 @@ class SearchPagingAdapter(private val clickListener: ClickInterface) :
 
     inner class SearchPagingViewHolder(val binding: ItemImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(doc: Response.Document?) {
+        fun bind(doc: ApiResponse.Document?) {
             binding.item = doc
             binding.imgHeart.setOnClickListener {
                 clickListener.saveClicked(binding.imgHeart, doc)
@@ -38,17 +38,17 @@ class SearchPagingAdapter(private val clickListener: ClickInterface) :
     }
 
     companion object {
-        private val ItemDiffCallBack = object : DiffUtil.ItemCallback<Response.Document>() {
+        private val ItemDiffCallBack = object : DiffUtil.ItemCallback<ApiResponse.Document>() {
             override fun areItemsTheSame(
-                oldItem: Response.Document,
-                newItem: Response.Document
+                oldItem: ApiResponse.Document,
+                newItem: ApiResponse.Document
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: Response.Document,
-                newItem: Response.Document
+                oldItem: ApiResponse.Document,
+                newItem: ApiResponse.Document
             ): Boolean {
                 return oldItem == newItem
             }

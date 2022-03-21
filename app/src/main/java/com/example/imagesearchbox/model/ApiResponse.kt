@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class Response(
+data class ApiResponse(
     val documents: List<Document>,
     val meta: Meta
 ) {

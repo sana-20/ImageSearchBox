@@ -3,14 +3,15 @@ package com.example.imagesearchbox
 import android.content.Context
 import com.example.imagesearchbox.api.CacheInterceptor
 import com.example.imagesearchbox.api.SearchService
-import com.example.imagesearchbox.db.MyBoxDatabase
-import com.example.imagesearchbox.repository.MyBoxRepository
 import com.example.imagesearchbox.api.URL.BASE_URL
+import com.example.imagesearchbox.db.MyBoxDatabase
 import com.example.imagesearchbox.repository.ApiRepository
+import com.example.imagesearchbox.repository.MyBoxRepository
 import com.example.imagesearchbox.repository.RepositoryImpl
 import com.example.imagesearchbox.viewmodel.MyBoxViewModel
 import com.example.imagesearchbox.viewmodel.SearchViewModel
 import com.google.gson.GsonBuilder
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -19,9 +20,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 val appModules = module {
     single {
-        createWebService<SearchService>(okHttpClient = createHttpClient(), baseUrl = BASE_URL)
+        createWebService<SearchService>(okHttpClient = createHttpClient(androidContext()), baseUrl = BASE_URL)
     }
 
     factory<ApiRepository> {
@@ -46,12 +48,18 @@ fun getRepository(context: Context): MyBoxRepository {
 }
 
 
-fun createHttpClient(): OkHttpClient {
+fun createHttpClient(context: Context): OkHttpClient {
+    val cacheSize = (10 * 1024 * 1024).toLong() // 10 MB
+    val cache = Cache(context.cacheDir, cacheSize)
+
     return OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
         .readTimeout(10, TimeUnit.SECONDS)
         .writeTimeout(10, TimeUnit.SECONDS)
-        .addInterceptor(CacheInterceptor()).build()
+        .addInterceptor(CacheInterceptor(context).offlineInterceptor)
+        .addNetworkInterceptor(CacheInterceptor(context).onlineInterceptor)
+        .cache(cache)
+        .build()
 }
 
 inline fun <reified T> createWebService(okHttpClient: OkHttpClient, baseUrl: String): T {
