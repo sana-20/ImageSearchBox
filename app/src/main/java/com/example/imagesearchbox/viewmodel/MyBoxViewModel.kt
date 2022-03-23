@@ -16,4 +16,10 @@ class MyBoxViewModel(private val dataRepository: MyBoxRepository) : ViewModel() 
     fun insert(myBox: MyBox) = viewModelScope.launch {
         dataRepository.insert(myBox)
     }
+
+    fun deleteAll() = viewModelScope.launch {
+        dataRepository.deleteAll()
+    }
+
+
 }

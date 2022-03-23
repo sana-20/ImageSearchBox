@@ -18,6 +18,10 @@ class MyBoxRepository(database: MyBoxDatabase) {
         dao.insert(myBox)
     }
 
+    suspend fun deleteAll(){
+        dao.deleteAll()
+    }
+
     companion object {
         private lateinit var sInstance: MyBoxRepository
 

@@ -21,6 +21,10 @@ class MyBoxFragment : BaseFragment<FragmentBoxBinding>() {
             adapter = myBoxRecyclerAdapter
         }
 
+        binding.btnDeleteAll.setOnClickListener {
+            myBoxViewModel.deleteAll()
+        }
+
         myBoxViewModel.allMyBox.observe(owner = viewLifecycleOwner) {
             myBoxRecyclerAdapter.updateData(it)
         }
