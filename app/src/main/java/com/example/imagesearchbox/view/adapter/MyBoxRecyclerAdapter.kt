@@ -4,10 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagesearchbox.databinding.ItemBoxBinding
+import com.example.imagesearchbox.model.ApiResponse
 import com.example.imagesearchbox.model.MyBox
 import kotlin.properties.Delegates
 
-class MyBoxRecyclerAdapter: RecyclerView.Adapter<MyBoxRecyclerAdapter.ViewHolder>() {
+class MyBoxRecyclerAdapter(val clickInterface: ClickInterface): RecyclerView.Adapter<MyBoxRecyclerAdapter.ViewHolder>() {
+
+    interface ClickInterface {
+        fun saveClicked(id: Int)
+    }
 
     private var items: List<MyBox> by Delegates.observable(arrayListOf()) { _, _, _ ->
         notifyDataSetChanged()
@@ -20,6 +25,10 @@ class MyBoxRecyclerAdapter: RecyclerView.Adapter<MyBoxRecyclerAdapter.ViewHolder
     inner class ViewHolder(private val binding: ItemBoxBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MyBox){
             binding.item = item
+
+            binding.imgHeart.setOnClickListener {
+                clickInterface.saveClicked(item.id)
+            }
         }
     }
 

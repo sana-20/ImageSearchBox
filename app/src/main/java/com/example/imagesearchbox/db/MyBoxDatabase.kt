@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.imagesearchbox.model.MyBox
 import com.example.imagesearchbox.utils.Constants.DATABASE_NAME
 
-@Database(entities = [MyBox::class], version = 3)
+@Database(entities = [MyBox::class], version = 1)
 abstract class MyBoxDatabase : RoomDatabase() {
 
     abstract fun myBoxDao(): MyBoxDao

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("loadUrl")
 fun ImageView.loadUrl(url: String) {
@@ -19,8 +20,11 @@ fun ImageView.loadUrl(url: String) {
 @BindingAdapter("setDate")
 fun TextView.setDate(datetime: String) {
     val formatDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(datetime)
-    val newText = SimpleDateFormat("YYYY/MM/DD HH:mm").format(formatDate)
-    text = newText
+    text = setDateFormat(formatDate)
+}
+
+fun setDateFormat(date: Date) : String{
+    return SimpleDateFormat("YYYY/MM/DD HH:mm").format(date)
 }
 
 

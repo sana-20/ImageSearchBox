@@ -18,6 +18,10 @@ class MyBoxRepository(database: MyBoxDatabase) {
         dao.insert(myBox)
     }
 
+    suspend fun delete(id: Int){
+        dao.delete(id)
+    }
+
     suspend fun deleteAll(){
         dao.deleteAll()
     }

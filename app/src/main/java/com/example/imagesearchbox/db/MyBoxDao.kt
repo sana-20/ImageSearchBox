@@ -17,6 +17,9 @@ interface MyBoxDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(myBox: MyBox)
 
+    @Query("DELETE FROM $DATABASE_NAME WHERE id = :id")
+    suspend fun delete(id: Int)
+
     @Query("DELETE FROM $DATABASE_NAME")
     suspend fun deleteAll()
 
