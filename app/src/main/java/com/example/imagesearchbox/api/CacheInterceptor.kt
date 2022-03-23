@@ -22,7 +22,6 @@ class CacheInterceptor(context: Context) {
                 .addHeader("Authorization", Constants.API_KEY)
                 .header("Cache-Control", "public, max-age=300")
                 .removeHeader("Pragma")
-            Logger.d(builder.build())
             return chain.proceed(builder.build())
         }
     }
