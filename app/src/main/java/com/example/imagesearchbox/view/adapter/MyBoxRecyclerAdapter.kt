@@ -24,10 +24,7 @@ class MyBoxRecyclerAdapter(val clickInterface: ClickInterface): RecyclerView.Ada
     inner class ViewHolder(private val binding: ItemBoxBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MyBox){
             binding.item = item
-
-            binding.imgHeart.setOnClickListener {
-                clickInterface.saveClicked(item.id)
-            }
+            binding.listener = clickInterface
         }
     }
 

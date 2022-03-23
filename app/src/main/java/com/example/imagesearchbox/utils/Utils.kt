@@ -23,7 +23,7 @@ object Utils {
     }
 
     fun setDateFormat(date: Date) : String{
-        return SimpleDateFormat("YYYY/MM/DD HH:mm").format(date)
+        return SimpleDateFormat("YYYY/MM/dd HH:mm").format(date)
     }
 
     fun Activity.hideSoftKeyboard() {

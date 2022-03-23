@@ -4,6 +4,9 @@
         <variable
             name="item"
             type="com.example.imagesearchbox.model.MyBox" />
+        <variable
+            name="listener"
+            type="com.example.imagesearchbox.view.adapter.MyBoxRecyclerAdapter.ClickInterface" />
     </data>
 
     <RelativeLayout
@@ -16,7 +19,7 @@
             android:id="@+id/img_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="128dp"
-            android:scaleType="matrix"
+            android:scaleType="fitCenter"
             loadUrl="@{item.url}"/>
 
         <TextView
@@ -34,6 +37,7 @@
             android:id="@+id/img_heart"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:onClick="@{()->listener.saveClicked(item.id)}"
             android:layout_below="@id/img_thumbnail"
             android:layout_alignParentEnd="true"
             android:src="@drawable/icon_on" />
