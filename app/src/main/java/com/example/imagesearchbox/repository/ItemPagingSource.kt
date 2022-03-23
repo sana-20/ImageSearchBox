@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.imagesearchbox.api.SearchService
 import com.example.imagesearchbox.model.ApiResponse
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
@@ -31,7 +30,7 @@ class ItemPagingSource(private val service: SearchService, private val query: St
 
                 val mergedList = mergeResponse(imageResponse.documents, videoResponse.documents)
 
-                val isEnd = imageResponse.meta.is_end && videoResponse.meta.is_end
+                val isEnd = imageResponse.meta.is_end || videoResponse.meta.is_end
                 val nextKey = if (isEnd) null else page + 1
 
                 LoadResult.Page(
