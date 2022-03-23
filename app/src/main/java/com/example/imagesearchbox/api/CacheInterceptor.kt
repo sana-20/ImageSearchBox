@@ -1,16 +1,12 @@
 package com.example.imagesearchbox.api
 
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import com.example.imagesearchbox.utils.Constants
 import com.example.imagesearchbox.utils.Utils.isInternetAvailable
-import com.orhanobut.logger.Logger
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
-
 
 class CacheInterceptor(context: Context) {
 

@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.imagesearchbox.databinding.FragmentSearchBinding
 import com.example.imagesearchbox.model.ApiResponse
 import com.example.imagesearchbox.model.MyBox
-import com.example.imagesearchbox.utils.hideSoftKeyboard
-import com.example.imagesearchbox.utils.setDateFormat
+import com.example.imagesearchbox.utils.Utils.hideSoftKeyboard
+import com.example.imagesearchbox.utils.Utils.setDateFormat
 import com.example.imagesearchbox.view.adapter.SearchAdapter
 import com.example.imagesearchbox.viewmodel.MyBoxViewModel
 import com.example.imagesearchbox.viewmodel.SearchViewModel
@@ -16,7 +16,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchAdapter.ClickInterface {

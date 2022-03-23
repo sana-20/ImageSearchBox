@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagesearchbox.databinding.ItemBoxBinding
-import com.example.imagesearchbox.model.ApiResponse
 import com.example.imagesearchbox.model.MyBox
 import kotlin.properties.Delegates
 

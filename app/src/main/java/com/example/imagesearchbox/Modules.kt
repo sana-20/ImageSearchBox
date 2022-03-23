@@ -20,7 +20,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 val appModules = module {
     single {
         createWebService<SearchService>(okHttpClient = createHttpClient(androidContext()), baseUrl = BASE_URL)
@@ -36,17 +35,14 @@ val appModules = module {
     }
 }
 
-
 val viewModelModules = module {
     viewModel { SearchViewModel(repository = get()) }
     viewModel { MyBoxViewModel(dataRepository = get()) }
 }
 
-
 fun getRepository(context: Context): MyBoxRepository {
     return MyBoxRepository.getInstance(MyBoxDatabase.getDatabase(context))
 }
-
 
 fun createHttpClient(context: Context): OkHttpClient {
     val cacheSize = (10 * 1024 * 1024).toLong() // 10 MB

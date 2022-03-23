@@ -8,7 +8,6 @@ import com.example.imagesearchbox.model.MyBox
 import com.example.imagesearchbox.repository.MyBoxRepository
 import kotlinx.coroutines.launch
 
-
 class MyBoxViewModel(private val dataRepository: MyBoxRepository) : ViewModel() {
 
     val allMyBox: LiveData<List<MyBox>> = dataRepository.allMyBox.asLiveData()

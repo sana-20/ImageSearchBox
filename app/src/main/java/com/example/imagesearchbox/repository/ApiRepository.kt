@@ -8,7 +8,6 @@ import com.example.imagesearchbox.model.ApiResponse
 import com.example.imagesearchbox.repository.ItemPagingSource.Companion.NETWORK_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 
-
 interface ApiRepository {
     suspend fun getImagePaging(query: String): Flow<PagingData<ApiResponse.Document>>
 }
