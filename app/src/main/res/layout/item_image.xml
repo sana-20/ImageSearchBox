@@ -37,7 +37,7 @@
             android:layout_height="24dp"
             android:layout_below="@id/img_thumbnail"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/icon_off" />
+            android:src="@drawable/selector_save" />
 
     </RelativeLayout>
 
