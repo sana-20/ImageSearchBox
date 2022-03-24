@@ -16,26 +16,23 @@ class ItemPagingSource(private val service: SearchService, private val query: St
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ApiResponse.Document> {
         return try {
-            coroutineScope {
-                val page = params.key ?: ITEM_STARTING_PAGE_INDEX
+            val page = params.key ?: ITEM_STARTING_PAGE_INDEX
 
-                val callHandler = MultipleCallHandler(
-                    arrayListOf(
-                        service.getImage(query, page, NETWORK_PAGE_SIZE),
-                        service.getVideo(query, page, NETWORK_PAGE_SIZE)
-                    )
+            val callHandler = MultipleCallHandler(
+                arrayListOf(
+                    service.getImage(query, page, NETWORK_PAGE_SIZE),
+                    service.getVideo(query, page, NETWORK_PAGE_SIZE)
                 )
-                callHandler.callApi()
+            )
+            callHandler.callApi()
 
-                val nextKey = if (callHandler.isEnd) null else page + 1
+            val nextKey = if (callHandler.isEnd) null else page + 1
 
-                LoadResult.Page(
-                    data = callHandler.pagingList,
-                    prevKey = if (page == ITEM_STARTING_PAGE_INDEX) null else page - 1,
-                    nextKey = nextKey
-                )
-
-            }
+            LoadResult.Page(
+                data = callHandler.pagingList,
+                prevKey = if (page == ITEM_STARTING_PAGE_INDEX) null else page - 1,
+                nextKey = nextKey
+            )
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
