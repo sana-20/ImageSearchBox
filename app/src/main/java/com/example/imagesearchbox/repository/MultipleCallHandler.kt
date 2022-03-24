@@ -5,7 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
-class PagingItems(private val apiList: List<ApiResponse>) {
+class MultipleCallHandler(private val apiList: List<ApiResponse>) {
 
     var isEnd = false
 

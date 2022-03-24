@@ -1,6 +1,5 @@
 package com.example.imagesearchbox.repository
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.imagesearchbox.api.SearchService
@@ -20,18 +19,18 @@ class ItemPagingSource(private val service: SearchService, private val query: St
             coroutineScope {
                 val page = params.key ?: ITEM_STARTING_PAGE_INDEX
 
-                val pagingItems = PagingItems(
+                val callHandler = MultipleCallHandler(
                     arrayListOf(
                         service.getImage(query, page, NETWORK_PAGE_SIZE),
                         service.getVideo(query, page, NETWORK_PAGE_SIZE)
                     )
                 )
-                pagingItems.callApi()
+                callHandler.callApi()
 
-                val nextKey = if (pagingItems.isEnd) null else page + 1
+                val nextKey = if (callHandler.isEnd) null else page + 1
 
                 LoadResult.Page(
-                    data = pagingItems.pagingList,
+                    data = callHandler.pagingList,
                     prevKey = if (page == ITEM_STARTING_PAGE_INDEX) null else page - 1,
                     nextKey = nextKey
                 )
