@@ -13,7 +13,7 @@ class SearchAdapter(
 ) : PagingDataAdapter<ApiResponse.Document, SearchItemViewHolder>(ItemDiffCallBack) {
 
     interface ClickInterface {
-        fun saveClicked(doc: ApiResponse.Document?)
+        fun favouriteClicked(doc: ApiResponse.Document?)
     }
 
     companion object {
@@ -34,7 +34,7 @@ class SearchAdapter(
         }
     }
 
-    val selectedItems = ObservableArrayList<Int>()
+    val favouriteItems = ObservableArrayList<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchItemViewHolder =
         SearchItemViewHolder(ItemImageBinding.inflate(LayoutInflater.from(parent.context)))
@@ -43,13 +43,13 @@ class SearchAdapter(
         holderItem.bindTo(this, getItem(position))
     }
 
-    fun addItemToSelection(position: Int): Boolean = selectedItems.add(position)
+    fun addItemToFavourite(position: Int): Boolean = favouriteItems.add(position)
 
-    fun isItemSelected(position: Int) = selectedItems.contains(position)
+    fun isFavouriteItem(position: Int) = favouriteItems.contains(position)
 
-    fun isLastSelectedItem(position: Int) =
-        isItemSelected(position) && selectedItems.size == 1
+    fun isLastItem(position: Int) =
+        isFavouriteItem(position) && favouriteItems.size == 1
 
-    fun deleteAllItems() = selectedItems.clear()
+    fun deleteAllFavouriteItems() = favouriteItems.clear()
 
 }

@@ -14,23 +14,23 @@ class SearchItemViewHolder(private val binding: ItemImageBinding) :
         this.adapter = adapter
         binding.item = doc
 
-        binding.imgHeart.setOnClickListener {
-            if (!adapter.isItemSelected(layoutPosition)) {
-                adapter.clickInterface.saveClicked(doc)
+        binding.imgFavourite.setOnClickListener {
+            if (!adapter.isFavouriteItem(layoutPosition)) {
+                adapter.clickInterface.favouriteClicked(doc)
 
-                if (adapter.isLastSelectedItem(layoutPosition)) {
+                if (adapter.isLastItem(layoutPosition)) {
                     return@setOnClickListener
                 }
-                setItemChecked()
+                addItem()
             }
         }
 
-        adapter.selectedItems.addOnListChangedCallback(onSelectedItemsChanged)
+        adapter.favouriteItems.addOnListChangedCallback(onFavouriteItemsChanged)
 
         listChanged()
     }
 
-    private val onSelectedItemsChanged =
+    private val onFavouriteItemsChanged =
         object : ObservableList.OnListChangedCallback<ObservableList<Int>>() {
 
             override fun onChanged(sender: ObservableList<Int>?) {
@@ -73,12 +73,12 @@ class SearchItemViewHolder(private val binding: ItemImageBinding) :
         }
 
     private fun listChanged() {
-        binding.imgHeart.isSelected = adapter.isItemSelected(layoutPosition)
+        binding.imgFavourite.isSelected = adapter.isFavouriteItem(layoutPosition)
     }
 
-    private fun setItemChecked() {
+    private fun addItem() {
         layoutPosition.let {
-            adapter.addItemToSelection(it)
+            adapter.addItemToFavourite(it)
         }
     }
 }

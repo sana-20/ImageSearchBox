@@ -28,19 +28,19 @@
             android:layout_height="wrap_content"
             text="@{item.date}"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/img_heart"
+            android:layout_toStartOf="@id/img_favourite"
             android:layout_marginEnd="4dp"
             android:textSize="16sp"
             android:layout_below="@id/img_thumbnail"/>
 
         <ImageView
-            android:id="@+id/img_heart"
+            android:id="@+id/img_favourite"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:onClick="@{()->listener.saveClicked(item.id)}"
+            android:onClick="@{()->listener.favouriteClicked(item.id)}"
             android:layout_below="@id/img_thumbnail"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/icon_on" />
+            android:src="@drawable/icon_favourite_on" />
 
     </RelativeLayout>
 

@@ -45,7 +45,7 @@ fun getRepository(context: Context): MyBoxRepository {
 }
 
 fun createHttpClient(context: Context): OkHttpClient {
-    val cacheSize = (10 * 1024 * 1024).toLong() // 10 MB
+    val cacheSize = (10 * 1024 * 1024).toLong()
     val cache = Cache(context.cacheDir, cacheSize)
 
     return OkHttpClient.Builder()

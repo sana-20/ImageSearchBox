@@ -56,13 +56,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchAdapter.Clic
         job?.cancel()
         job = lifecycleScope.launch {
             searchViewModel.getImages(query).collectLatest {
-                searchAdapter.deleteAllItems()
+                searchAdapter.deleteAllFavouriteItems()
                 searchAdapter.submitData(it)
             }
         }
     }
 
-    override fun saveClicked(doc: ApiResponse.Document?) {
+    override fun favouriteClicked(doc: ApiResponse.Document?) {
         doc?.thumbnail?.let {
             val date = setDateFormat(Date())
             myBoxViewModel.insert(MyBox(it, date))

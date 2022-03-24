@@ -10,7 +10,7 @@ import kotlin.properties.Delegates
 class MyBoxRecyclerAdapter(val clickInterface: ClickInterface): RecyclerView.Adapter<MyBoxRecyclerAdapter.ViewHolder>() {
 
     interface ClickInterface {
-        fun saveClicked(id: Int)
+        fun favouriteClicked(id: Int)
     }
 
     private var items: List<MyBox> by Delegates.observable(arrayListOf()) { _, _, _ ->

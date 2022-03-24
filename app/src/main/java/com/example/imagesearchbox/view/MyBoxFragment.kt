@@ -30,7 +30,7 @@ class MyBoxFragment : BaseFragment<FragmentBoxBinding>(), MyBoxRecyclerAdapter.C
         }
     }
 
-    override fun saveClicked(id: Int) {
+    override fun favouriteClicked(id: Int) {
         myBoxViewModel.delete(id)
     }
 
