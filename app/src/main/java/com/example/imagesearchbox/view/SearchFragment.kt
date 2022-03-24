@@ -41,7 +41,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(), SearchAdapter.Clic
         binding.editSearch.setOnKeyListener { view, i, keyEvent ->
             if(keyEvent.action==KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER){
                 val searchView = view as EditText
-                searchImages(searchView.text.toString())
+                searchImages(searchView.text.toString().trim())
                 requireActivity().hideSoftKeyboard()
                 searchView.clearFocus()
                 searchView.isCursorVisible = false
