@@ -17,6 +17,7 @@ class CacheInterceptor(context: Context) {
             val builder = request.newBuilder()
                 .addHeader("Authorization", Constants.API_KEY)
                 .header("Cache-Control", "public, max-age=300")
+                .header("If-None-Match", "*")
                 .removeHeader("Pragma")
             return chain.proceed(builder.build())
         }
