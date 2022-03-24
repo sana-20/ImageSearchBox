@@ -1,10 +1,10 @@
 package com.example.imagesearchbox.repository
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.imagesearchbox.api.SearchService
 import com.example.imagesearchbox.model.ApiResponse
-import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 
 class ItemPagingSource(private val service: SearchService, private val query: String) :
@@ -20,21 +20,18 @@ class ItemPagingSource(private val service: SearchService, private val query: St
             coroutineScope {
                 val page = params.key ?: ITEM_STARTING_PAGE_INDEX
 
-                val imageResponse: ApiResponse?
-                val videoResponse: ApiResponse?
-                val imageCall = async { service.getImage(query, page, NETWORK_PAGE_SIZE) }
-                val videoCall = async { service.getVideo(query, page, NETWORK_PAGE_SIZE) }
+                val pagingItems = PagingItems(
+                    arrayListOf(
+                        service.getImage(query, page, NETWORK_PAGE_SIZE),
+                        service.getVideo(query, page, NETWORK_PAGE_SIZE)
+                    )
+                )
+                pagingItems.callApi()
 
-                imageResponse = imageCall.await()
-                videoResponse = videoCall.await()
-
-                val mergedList = mergeResponse(imageResponse.documents, videoResponse.documents)
-
-                val isEnd = imageResponse.meta.is_end || videoResponse.meta.is_end
-                val nextKey = if (isEnd) null else page + 1
+                val nextKey = if (pagingItems.isEnd) null else page + 1
 
                 LoadResult.Page(
-                    data = mergedList,
+                    data = pagingItems.pagingList,
                     prevKey = if (page == ITEM_STARTING_PAGE_INDEX) null else page - 1,
                     nextKey = nextKey
                 )
@@ -44,20 +41,6 @@ class ItemPagingSource(private val service: SearchService, private val query: St
             LoadResult.Error(e)
         }
     }
-
-    private fun mergeResponse(
-        list1: List<ApiResponse.Document>,
-        list2: List<ApiResponse.Document>
-    ): MutableList<ApiResponse.Document> {
-        val mergedList = mutableListOf<ApiResponse.Document>()
-        mergedList.addAll(list1)
-        mergedList.addAll(list2)
-        mergedList.sortByDescending {
-            it.datetime
-        }
-        return mergedList
-    }
-
 
     override fun getRefreshKey(state: PagingState<Int, ApiResponse.Document>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
