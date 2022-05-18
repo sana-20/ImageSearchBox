@@ -8,7 +8,7 @@ import com.example.imagesearchbox.view.SearchFragment
 import com.example.imagesearchbox.utils.Constants.TAB_MYPAGE
 import com.example.imagesearchbox.utils.Constants.TAB_SEARCH
 
-class FragmentTabAdapter(val fm: FragmentManager, private val tabs: List<String>) : FragmentPagerAdapter(fm){
+class FragmentTabAdapter(fm: FragmentManager, private val tabs: List<String>) : FragmentPagerAdapter(fm){
     override fun getCount(): Int {
         return tabs.size
     }

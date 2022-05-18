@@ -4,9 +4,6 @@
         <variable
             name="item"
             type="com.example.imagesearchbox.model.MyBox" />
-        <variable
-            name="listener"
-            type="com.example.imagesearchbox.view.adapter.MyBoxRecyclerAdapter.ClickInterface" />
     </data>
 
     <RelativeLayout
@@ -37,7 +34,6 @@
             android:id="@+id/img_favourite"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:onClick="@{()->listener.favouriteClicked(item.id)}"
             android:layout_below="@id/img_thumbnail"
             android:layout_alignParentEnd="true"
             android:src="@drawable/icon_favourite_on" />

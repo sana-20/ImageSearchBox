@@ -7,14 +7,16 @@ import com.example.imagesearchbox.view.adapter.MyBoxRecyclerAdapter
 import com.example.imagesearchbox.viewmodel.MyBoxViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MyBoxFragment : BaseFragment<FragmentBoxBinding>(), MyBoxRecyclerAdapter.ClickInterface {
+class MyBoxFragment : BaseFragment<FragmentBoxBinding>() {
 
     private val myBoxViewModel: MyBoxViewModel by viewModel()
 
-    override fun getViewBinding(): FragmentBoxBinding =  FragmentBoxBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentBoxBinding = FragmentBoxBinding.inflate(layoutInflater)
 
     override fun initView() {
-        val myBoxRecyclerAdapter = MyBoxRecyclerAdapter(this)
+        val myBoxRecyclerAdapter = MyBoxRecyclerAdapter { id ->
+            myBoxViewModel.delete(id)
+        }
 
         binding.recyclerBox.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -26,12 +28,8 @@ class MyBoxFragment : BaseFragment<FragmentBoxBinding>(), MyBoxRecyclerAdapter.C
         }
 
         myBoxViewModel.allMyBox.observe(owner = viewLifecycleOwner) {
-            myBoxRecyclerAdapter.updateData(it)
+            myBoxRecyclerAdapter.submitList(it)
         }
-    }
-
-    override fun favouriteClicked(id: Int) {
-        myBoxViewModel.delete(id)
     }
 
 }

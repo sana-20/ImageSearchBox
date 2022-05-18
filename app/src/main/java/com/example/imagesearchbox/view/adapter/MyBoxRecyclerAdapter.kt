@@ -2,29 +2,20 @@ package com.example.imagesearchbox.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imagesearchbox.databinding.ItemBoxBinding
 import com.example.imagesearchbox.model.MyBox
-import kotlin.properties.Delegates
 
-class MyBoxRecyclerAdapter(val clickInterface: ClickInterface): RecyclerView.Adapter<MyBoxRecyclerAdapter.ViewHolder>() {
-
-    interface ClickInterface {
-        fun favouriteClicked(id: Int)
-    }
-
-    private var items: List<MyBox> by Delegates.observable(arrayListOf()) { _, _, _ ->
-        notifyDataSetChanged()
-    }
-
-    fun updateData(newData: List<MyBox>) {
-        items = newData
-    }
+class MyBoxRecyclerAdapter(private val onClicked: (id: Int) -> Unit): ListAdapter<MyBox, MyBoxRecyclerAdapter.ViewHolder>(MyBoxDiffUtil) {
 
     inner class ViewHolder(private val binding: ItemBoxBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MyBox){
             binding.item = item
-            binding.listener = clickInterface
+            binding.imgFavourite.setOnClickListener {
+                onClicked.invoke(item.id)
+            }
         }
     }
 
@@ -33,10 +24,17 @@ class MyBoxRecyclerAdapter(val clickInterface: ClickInterface): RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+
+    object MyBoxDiffUtil: DiffUtil.ItemCallback<MyBox>() {
+        override fun areItemsTheSame(oldItem: MyBox, newItem: MyBox): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: MyBox, newItem: MyBox): Boolean {
+            return oldItem == newItem
+        }
     }
 }

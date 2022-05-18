@@ -22,7 +22,7 @@ class SearchAdapter(
                 oldItem: ApiResponse.Document,
                 newItem: ApiResponse.Document
             ): Boolean {
-                return oldItem == newItem
+                return oldItem.thumbnail == newItem.thumbnail
             }
 
             override fun areContentsTheSame(
